@@ -7,11 +7,25 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-
     <div id="gameContainer">
         <canvas id="staticCanvas"></canvas>
         
         <canvas id="dinamicCanvas"></canvas>
     </div>
 </body>
+<script>
+    let h= 550;
+    let w= 800;
+
+    let canvas_dinamic = document.getElementById("playCanvas"); 
+    let canvas_static = document.getElementById("bgCanvas");
+
+    canvas_dinamic.height = h;
+    canvas_dinamic.width = w;
+    canvas_static.height = h;
+    canvas_static.width = w;
+
+    let ctx_dinamic = canvas_dinamic.getContext("2d");
+    let ctx_static = canvas_static.getContext("2d");
+</script>
 </html>
