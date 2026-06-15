@@ -9,13 +9,13 @@ class terreno
 
         this.picos = [];
         this.plataformas = [];
-        this.displacement = 180;
+        this.forca = 180;
         
         //potencia de base 2 mais proxima da largura da tela para o algoritimo (Power of Two)
         this.PoT = Math.pow(2, Math.ceil(Math.log(this.width) / Math.log(2)));
 
         this.#gerar_picos();
-        this.#gerar_plataformas();
+        //this.#gerar_plataformas();
     }
 
     #gerar_picos()
@@ -23,21 +23,41 @@ class terreno
         this.picos[0] = 450;
         this.picos[this.PoT] = 450;
 
-        // intervalo entre +180 e -180 para criar a diferenca pós media dos vizinhos
-        let forca = (Math.random() * (this.displacement * 2)) - this.displacement;
-
         for (let a = 1; a < this.PoT; a *= 2)
-        {
+        {   
             for (let b = this.PoT / a / 2; b < this.PoT; b += this.PoT / a)
             {
-                this.picos[b] = (this.picos[b - this.PoT / a / 2] + this.picos[b + this.PoT / a / 2]) / 2 + forca
+                // intervalo entre forca e -forca para gerar a diferenca entre os vizinhos
+                let intervalo_forca = (Math.random() * (this.forca * 2)) - this.forca;
+                
+                this.picos[b] = (this.picos[b - this.PoT / a / 2] + this.picos[b + this.PoT / a / 2]) / 2 + intervalo_forca
             }
-            this.displacement *= 0.7;
+            this.forca *= 0.7;
         }
     }
 
     #gerar_plataformas()
     {
 
+    }
+
+    draw()
+    {
+        this.ctx.strokeStyle = "black";
+        this.ctx.lineWidth = 1;
+        this.ctx.clearRect(0, 0, this.width, this.height);
+        this.ctx.beginPath()
+        for(let x = 0; x <= this.width; x += 3)
+        {
+            if(x === 0)
+            {
+                this.ctx.moveTo(0, this.picos[x]);
+            }
+            else if (this.picos[x] !== undefined) 
+            {
+                this.ctx.lineTo(x, this.picos[x]);
+            }
+        }
+        this.ctx.stroke();
     }
 }
