@@ -1,4 +1,4 @@
-class terreno
+class Terreno
 {
     constructor(width, height, ctx)
     {
@@ -8,20 +8,20 @@ class terreno
         this.height = height;
 
         this.picos = [];
-        this.plataformas = [];
+        this.plataformas = {};
         this.forca = 180;
         
         //potencia de base 2 mais proxima da largura da tela para o algoritimo (Power of Two)
         this.PoT = Math.pow(2, Math.ceil(Math.log(this.width) / Math.log(2)));
 
         this.#gerar_picos();
-        //this.#gerar_plataformas();
+        this.#gerar_plataformas();
     }
 
     #gerar_picos()
     {
-        this.picos[0] = 450;
-        this.picos[this.PoT] = 450;
+        this.picos[0] = 350;
+        this.picos[this.PoT] = 350;
 
         for (let a = 1; a < this.PoT; a *= 2)
         {   
@@ -38,7 +38,19 @@ class terreno
 
     #gerar_plataformas()
     {
+        for(let i= 0; i < 4; i++)
+        {
+            let largura_plataforma = Math.trunc(Math.random() * this.width * 0.08)
+            let inicio = Math.trunc(Math.random() * (this.width - largura_plataforma))
+            let altura= this.picos[inicio]
 
+            for(let x= inicio; x <= (inicio + largura_plataforma); x++)
+            {
+                this.picos[x] = altura
+            }
+            this.plataformas.inicio
+        }
+        
     }
 
     draw()

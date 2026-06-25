@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS Lander Game</title>
     <link rel="stylesheet" href="./css/style.css">
+    <script src="./script/terrreno.js"></script>
+    <script src=""></script>
 </head>
 <body>
     <div id="gameContainer">
@@ -17,8 +19,8 @@
     let h= 550;
     let w= 800;
 
-    let canvas_dinamic = document.getElementById("playCanvas"); 
-    let canvas_static = document.getElementById("bgCanvas");
+    let canvas_dinamic = document.getElementById("dinamicCanvas"); 
+    let canvas_static = document.getElementById("staticCanvas");
 
     canvas_dinamic.height = h;
     canvas_dinamic.width = w;
@@ -27,5 +29,9 @@
 
     let ctx_dinamic = canvas_dinamic.getContext("2d");
     let ctx_static = canvas_static.getContext("2d");
+
+    const terreno = new Terreno(w, h, ctx_static)
+
+    terreno.draw()
 </script>
 </html>
