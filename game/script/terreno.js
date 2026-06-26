@@ -29,7 +29,7 @@ class Terreno
             for (let b = this.PoT / a / 2; b < this.PoT; b += this.PoT / a)
             {
                 // intervalo entre forca e -forca para gerar a diferenca entre os vizinhos
-                let intervalo_forca = (Math.random() * (this.forca * 2)) - this.forca;
+                let intervalo_forca = (Math.random() * (this.forca * 2)) - (this.forca - 0.1);
                 
                 this.picos[b] = (this.picos[b - this.PoT / a / 2] + this.picos[b + this.PoT / a / 2]) / 2 + intervalo_forca
             }
@@ -46,15 +46,27 @@ class Terreno
             let xFinal = xInicial + largura;
             let y = this.picos[xInicial];
             let multiplicador= 0;
+            let tentativas= 0;
+            let colisao;
+
+            do {
+            xInicial = Math.trunc(Math.random() * (this.width - largura));
+            xFinal = xInicial + largura;
+            colisao = false;
 
             for(let j of this.plataformas)
             {
                 if((xInicial <= j.xFinal + 50) && (xFinal >= j.xInicial - 50))
                 {
-                    xInicial = Math.trunc(Math.random() * (this.width - largura));
-                    xFinal = xInicial + largura;
+                    colisao = true;
+                    break; 
                 }
             }
+
+            tentativas++;
+            if(tentativas > 100) break;
+
+            } while(colisao);
             
             if (largura <= 50) {
                 multiplicador = 5;
