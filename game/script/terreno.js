@@ -38,19 +38,20 @@ class Terreno
 
     #gerar_plataformas()
     {
-        for(let i= 0; i < 4; i++)
+        for (let i = 0; i < 4; i++) 
         {
-            let largura_plataforma = Math.trunc(Math.random() * this.width * 0.08)
-            let inicio = Math.trunc(Math.random() * (this.width - largura_plataforma))
-            let altura= this.picos[inicio]
+            let largura = Math.trunc(Math.random() * this.width * 0.08 + 15);
+            let xInicial = Math.trunc(Math.random() * (this.width - largura));
+            let xFinal = xInicial + largura;
+            let y = this.picos[xInicial];
 
-            for(let x= inicio; x <= (inicio + largura_plataforma); x++)
+            for (let x = xInicial; x <= xFinal; x++) 
             {
-                this.picos[x] = altura
+                this.picos[x] = y;
             }
-            this.plataformas.inicio
+
+            this.plataforma.push({ xInicial, xFinal, y });
         }
-        
     }
 
     draw()

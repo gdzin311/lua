@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS Lander Game</title>
     <link rel="stylesheet" href="./css/style.css">
-    <script src="./script/terrreno.js"></script>
-    <script src=""></script>
+    <script src="./script/terreno.js"></script>
+    <script src="./script/hud.js"></script>
 </head>
 <body>
     <div id="gameContainer">
@@ -31,7 +31,9 @@
     let ctx_static = canvas_static.getContext("2d");
 
     const terreno = new Terreno(w, h, ctx_static)
+    const hud = new Hud(w, h, ctx_dinamic)
 
     terreno.draw()
+    hud.print()
 </script>
 </html>
