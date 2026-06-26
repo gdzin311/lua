@@ -13,12 +13,14 @@ class Hud
 
     print()
     {
-        this.ctx.fillText("score: 0", this.width*0.03, this.height*0.09)
-        this.ctx.fillText("time", this.width*0.03, this.height*0.12)
-        this.ctx.fillText("fuel", this.width*0.03, this.height*0.15)
+        this.ctx.fillText("score: 0", this.width*0.03, this.height*0.09);
+        this.ctx.fillText("time: " + segundos, this.width*0.03, this.height*0.12);
+        this.ctx.fillText("fuel", this.width*0.03, this.height*0.15);
 
-        this.ctx.fillText("score: 0", this.width*0.03, this.height*0.09)
-        this.ctx.fillText("time", this.width*0.03, this.height*0.12)
-        this.ctx.fillText("fuel", this.width*0.03, this.height*0.15)
-    }    
+        this.ctx.fillText("X Velocity: " + nave.vx.toFixed(2), this.width*0.85, this.height*0.09);
+        this.ctx.fillText("Y Velocity: " + nave.vy.toFixed(2), this.width*0.85, this.height*0.12);
+        this.ctx.fillText("Angle: " + Math.abs(Math.trunc(nave.angle)), this.width*0.85, this.height*0.15);
+    }
+
+    plataformas
 }

@@ -7,10 +7,15 @@ class Nave {
         this.vy = 0;
         this.accel = 0;
         this.angle = 0;
-        this.gravidade = 0.05;
+        this.gravidade = 0.009;
+        this.combustivel
 
         window.addEventListener("keydown", (event) => {
-            if (event.key === "ArrowUp")    this.accel = 0.15;
+            if (event.key === "ArrowUp")
+                {
+                    this.accel = 0.03;
+                    this.combustivel--;
+                }
             if (event.key === "ArrowLeft")  this.angle -= 0.1;
             if (event.key === "ArrowRight") this.angle += 0.1;
         });

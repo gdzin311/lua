@@ -8,7 +8,7 @@ class Terreno
         this.height = height;
 
         this.picos = [];
-        this.plataformas = {};
+        this.plataformas = [];
         this.forca = 180;
         
         //potencia de base 2 mais proxima da largura da tela para o algoritimo (Power of Two)
@@ -16,6 +16,7 @@ class Terreno
 
         this.#gerar_picos();
         this.#gerar_plataformas();
+        this.draw();
     }
 
     #gerar_picos()
@@ -40,17 +41,26 @@ class Terreno
     {
         for (let i = 0; i < 4; i++) 
         {
-            let largura = Math.trunc(Math.random() * this.width * 0.08 + 15);
+            let largura = Math.trunc(Math.random() * this.width * 0.07 + 15);
             let xInicial = Math.trunc(Math.random() * (this.width - largura));
             let xFinal = xInicial + largura;
             let y = this.picos[xInicial];
+            for(let j of this.plataformas)
+            {
+                if((xInicial <= j.xFinal + 50) && (xFinal >= j.xInicial - 50))
+                {
+                    xInicial = Math.trunc(Math.random() * (this.width - largura));
+                    xFinal = xInicial + largura;
+                }
+            }
+            let dificuldade = 1
 
             for (let x = xInicial; x <= xFinal; x++) 
             {
                 this.picos[x] = y;
             }
 
-            this.plataforma.push({ xInicial, xFinal, y });
+            this.plataformas.push({ xInicial, xFinal, y, dificuldade });
         }
     }
 

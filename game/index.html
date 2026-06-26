@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <script src="./script/terreno.js"></script>
     <script src="./script/hud.js"></script>
+    <script src="./script/nave.js"></script>
 </head>
 <body>
     <div id="gameContainer">
@@ -30,10 +31,31 @@
     let ctx_dinamic = canvas_dinamic.getContext("2d");
     let ctx_static = canvas_static.getContext("2d");
 
-    const terreno = new Terreno(w, h, ctx_static)
-    const hud = new Hud(w, h, ctx_dinamic)
+    const terreno = new Terreno(w, h, ctx_static);
+    const nave = new Nave(ctx_dinamic);
+    const hud = new Hud(w, h, ctx_dinamic, nave);
 
-    terreno.draw()
+    let frames = 0;
+    let segundos = 0;
+
+    function loop()
+    {
+        frames++;
+   
+        if (frames >= 60) 
+        {
+            segundos++;
+            frames = 0; 
+        }
+
+        nave.update();
+        ctx_dinamic.clearRect(0, 0, w, h);
+        nave.drawHitbox();
+        hud.print()
+    }
+
+    setInterval(loop, 1000/60);
+
     hud.print()
 </script>
 </html>
