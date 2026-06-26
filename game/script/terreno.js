@@ -39,12 +39,14 @@ class Terreno
 
     #gerar_plataformas()
     {
-        for (let i = 0; i < 4; i++) 
+        for (let i = 0; i < 3; i++) 
         {
-            let largura = Math.trunc(Math.random() * this.width * 0.07 + 15);
+            let largura = Math.floor(Math.random() * (90 - 40 + 1)) + 40;
             let xInicial = Math.trunc(Math.random() * (this.width - largura));
             let xFinal = xInicial + largura;
             let y = this.picos[xInicial];
+            let multiplicador= 0;
+
             for(let j of this.plataformas)
             {
                 if((xInicial <= j.xFinal + 50) && (xFinal >= j.xInicial - 50))
@@ -53,14 +55,23 @@ class Terreno
                     xFinal = xInicial + largura;
                 }
             }
-            let dificuldade = 1
+            
+            if (largura <= 50) {
+                multiplicador = 5;
+            } 
+            else if (largura <= 70) {
+                multiplicador = 3;
+            } 
+            else {
+                multiplicador = 1;
+            }
 
             for (let x = xInicial; x <= xFinal; x++) 
             {
                 this.picos[x] = y;
             }
 
-            this.plataformas.push({ xInicial, xFinal, y, dificuldade });
+            this.plataformas.push({ xInicial, xFinal, y, multiplicador});
         }
     }
 

@@ -13,6 +13,8 @@ class Hud
 
     print()
     {
+        this.ctx.textAlign= "start";
+
         this.ctx.fillText("score: 0", this.width*0.03, this.height*0.09);
         this.ctx.fillText("time: " + segundos, this.width*0.03, this.height*0.12);
         this.ctx.fillText("fuel", this.width*0.03, this.height*0.15);
@@ -22,5 +24,15 @@ class Hud
         this.ctx.fillText("Angle: " + Math.abs(Math.trunc(nave.angle)), this.width*0.85, this.height*0.15);
     }
 
-    plataformas
+    multiplicadores()
+    {
+        if(segundos%2 == 0)
+        {
+            this.ctx.textAlign = "center";
+            for(let i of terreno.plataformas)
+            {
+                this.ctx.fillText(i.multiplicador, i.xInicial + (i.xFinal - i.xInicial)/2, i.y + 15);
+            }
+        }
+    }
 }
